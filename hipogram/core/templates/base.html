@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Hipogram{% endblock %}</title>
+    <!---------- CSS ----------->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+    {% block css %}{% endblock %}
+    <!-------------------------->
+  </head>
+  <body>
+    {% block body %}
+      {% include "navbar.html" %}
+      <div class="container-fluid mt-5">
+        {% block content %}{% endblock %}
+      </div>
+    {% endblock body %}
+    <!------- JavaScript ------->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    {% block js %}{% endblock %}
+    <!-------------------------->
+  </body>
+
+
+{% if posts.has_other_pages %}
+  <div style="display: flex; justify-content: center;">
+  <ul class="pagination" >
+    {% if posts.has_previous %}
+      <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </div>
+{% endif %}
+
+</html>

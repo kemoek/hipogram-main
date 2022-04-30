@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <form
+      class="container"
+      method="POST"
+      action=""
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <h1 class="text-center text-primary">Upload Post</h1>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Post</label>
+        <input
+          type="file"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          name="post"
+        />
+      </div>
+
+    <br>
+
+    <textarea name="text-area" rows="4" cols="50" placeholder="Entry here."></textarea>
+      <button type="submit" class="btn btn-primary">Share</button>
+      </form>
+  </div>
+{% endblock content %}
